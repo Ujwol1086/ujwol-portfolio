@@ -115,7 +115,7 @@ const Hero = ({ scrollYProgress, scrollToSection }) => {
             </motion.div>
 
             <motion.h1
-              className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
               {...fadeInUp}
             >
               Hi, I'm <span className="gradient-text">Ujwol Aryal</span>
