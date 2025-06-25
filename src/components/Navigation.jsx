@@ -11,6 +11,7 @@ import {
   Phone,
   Award
 } from 'lucide-react'
+import UjwolLogo from '../assets/Ujwol_logo.png'
 
 const Navigation = ({ 
   activeSection, 
@@ -39,11 +40,26 @@ const Navigation = ({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <motion.div 
-              className="text-2xl font-bold gradient-text"
+              className="flex items-center"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => scrollToSection('home')}
+              style={{ cursor: 'pointer' }}
             >
-              Ujwol Aryal
+              <img 
+                src={UjwolLogo} 
+                alt="Ujwol Aryal Logo" 
+                className="h-10 w-40 object-contain"
+                onError={(e) => {
+                  // Fallback to text if logo doesn't load
+                  e.target.style.display = 'none';
+                  e.target.nextSibling.style.display = 'block';
+                }}
+              />
+              {/* Fallback text if logo doesn't load */}
+              <span className="text-2xl font-bold gradient-text hidden">
+                Ujwol Aryal
+              </span>
             </motion.div>
             
             {/* Desktop Navigation */}

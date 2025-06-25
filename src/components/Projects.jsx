@@ -10,15 +10,13 @@ const Projects = () => {
       description: 'Full-stack e-commerce solution with modern UI/UX, payment integration, and real-time inventory management',
       tech: ['React', 'Node.js', 'MongoDB', 'Express', 'Stripe'],
       status: 'Completed',
-      image: '🛒',
-      link: '#'
+      link: 'https://github.com/Ujwol1086/E-Commerce-MERN-'
     },
     {
       title: 'Food Delivery WebApp',
       description: 'Modern food delivery application with real-time tracking, GPS integration, and seamless user experience',
       tech: ['React', 'Node.js', 'MongoDB', 'Socket.io', 'Maps API'],
-      status: 'Completed',
-      image: '🍕',
+      status: 'In Progress',
       link: '#'
     },
     {
@@ -26,33 +24,29 @@ const Projects = () => {
       description: 'Drag-and-drop form builder with dynamic validation, conditional logic, and export functionality',
       tech: ['React', 'TypeScript', 'Tailwind', 'React DnD'],
       status: 'Completed',
-      image: '📝',
-      link: '#'
+      link: 'https://github.com/Ujwol1086/Interactive-Form-Builder-React'
     },
     {
-      title: 'CV Maker',
+      title: 'hamroCV',
       description: 'Professional resume builder with multiple templates, PDF export, and ATS-friendly formatting',
       tech: ['PHP', 'MySQL', 'Bootstrap', 'jsPDF'],
       status: 'Completed',
-      image: '📄',
-      link: '#'
+      link: 'https://github.com/Ujwol1086/hamroCV'
     },
     {
       title: 'To-Do List Application',
       description: 'Task management app with advanced filtering, categories, deadlines, and productivity analytics',
       tech: ['React', 'Local Storage', 'CSS3', 'Chart.js'],
       status: 'Completed',
-      image: '✅',
       link: '#'
     },
-    {
-      title: 'Portfolio Website',
-      description: 'Modern, responsive portfolio with animations, dark mode, and optimized performance',
-      tech: ['React', 'Tailwind', 'Framer Motion', 'Vite'],
-      status: 'In Progress',
-      image: '🎨',
-      link: '#'
-    }
+   {
+      title: 'Draggable Card Slider',
+      description: 'A draggable card slider with smooth animations and responsive design',
+      tech: ['HTML', 'CSS3', 'JavaScript'],
+      status: 'Completed',
+      link: 'https://github.com/Ujwol1086/Draggable-Card-Slider'
+    },
   ]
 
   const staggerContainer = {
@@ -120,12 +114,14 @@ const Projects = () => {
                 ))}
               </div>
               
-              <motion.button
+              <a href={project.link} target="_blank" rel="noopener noreferrer">
+                <motion.button
                 className="flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
                 whileHover={{ x: 5 }}
               >
                 View Project <ExternalLink className="ml-2 w-4 h-4" />
               </motion.button>
+              </a>
             </motion.div>
           ))}
         </motion.div>
