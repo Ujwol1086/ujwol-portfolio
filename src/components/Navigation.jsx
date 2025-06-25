@@ -8,7 +8,8 @@ import {
   Code,
   GraduationCap,
   Briefcase,
-  Phone
+  Phone,
+  Award
 } from 'lucide-react'
 
 const Navigation = ({ 
@@ -50,9 +51,9 @@ const Navigation = ({
               {[
                 { id: 'home', label: 'Home', icon: User },
                 { id: 'about', label: 'About', icon: User },
+                { id: 'experience', label: 'Experience', icon: Briefcase },
                 { id: 'skills', label: 'Skills', icon: Code },
-                { id: 'education', label: 'Education', icon: GraduationCap },
-                { id: 'projects', label: 'Projects', icon: Briefcase },
+                { id: 'projects', label: 'Projects', icon: Award },
                 { id: 'contact', label: 'Contact', icon: Phone }
               ].map((item) => (
                 <motion.button
@@ -72,24 +73,26 @@ const Navigation = ({
               ))}
             </div>
 
-            {/* Theme Toggle & Mobile Menu */}
+            {/* Right side buttons */}
             <div className="flex items-center space-x-4">
+              {/* Theme Toggle */}
               <motion.button
                 onClick={() => setIsDarkMode(!isDarkMode)}
-                className="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
               </motion.button>
               
+              {/* Mobile menu button */}
               <motion.button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="md:hidden p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                className="md:hidden p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </motion.button>
             </div>
           </div>
@@ -107,9 +110,9 @@ const Navigation = ({
                 {[
                   { id: 'home', label: 'Home', icon: User },
                   { id: 'about', label: 'About', icon: User },
+                  { id: 'experience', label: 'Experience', icon: Briefcase },
                   { id: 'skills', label: 'Skills', icon: Code },
-                  { id: 'education', label: 'Education', icon: GraduationCap },
-                  { id: 'projects', label: 'Projects', icon: Briefcase },
+                  { id: 'projects', label: 'Projects', icon: Award },
                   { id: 'contact', label: 'Contact', icon: Phone }
                 ].map((item, index) => (
                   <motion.button

@@ -26,8 +26,7 @@ const Hero = ({ scrollYProgress, scrollToSection }) => {
         <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse" />
       </motion.div>
 
-      <div className="flex items-center justify-between gap-10">
-        <div className="max-w-4xl mx-auto text-center relative z-10">
+      <div className="max-w-4xl mx-auto text-center relative z-10">
           <motion.div
             className="mb-8"
             initial={{ opacity: 0, scale: 0 }}
@@ -98,11 +97,6 @@ const Hero = ({ scrollYProgress, scrollToSection }) => {
             </motion.div>
           </motion.div>
         </div>
-
-        <motion.div className="div">
-          <p>This is pic</p>
-        </motion.div>
-      </div>
 
       {/* Scroll Indicator */}
       <motion.div
