@@ -6,30 +6,21 @@ import SectionTitle from './SectionTitle'
 const Experience = () => {
   const experiences = [
     {
-      title: 'Full Stack Developer',
-      company: 'Tech Solutions Inc.',
+      title: 'Full Stack Developer Intern',
+      company: 'Goma Engineering Consultant Pvt. Ltd.',
       location: 'Remote',
       period: '2024 - Present',
-      type: 'work',
+      type: 'internship',
       description: 'Leading development of modern web applications using React, Node.js, and cloud technologies. Collaborated with cross-functional teams to deliver scalable solutions.',
       technologies: ['React', 'Node.js', 'MongoDB', 'AWS'],
       icon: Code
     },
-    {
-      title: 'Frontend Developer Intern',
-      company: 'Digital Innovation Lab',
-      location: 'Kathmandu, Nepal',
-      period: 'Jun 2023 - Dec 2023',
-      type: 'internship',
-      description: 'Developed responsive web applications and improved user interface designs. Gained hands-on experience with modern frontend frameworks and design systems.',
-      technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Figma'],
-      icon: Code
-    },
+   
     {
       title: 'Bachelor in Information Technology',
       company: 'Tribhuvan University',
       location: 'Kathmandu, Nepal',
-      period: '2020 - 2024',
+      period: '2021 - Present',
       type: 'education',
       description: 'Graduated with distinction focusing on software development, web technologies, and system design. Completed multiple projects in full-stack development.',
       technologies: ['Programming', 'Database Design', 'Software Engineering', 'Project Management'],
@@ -39,28 +30,17 @@ const Experience = () => {
       title: 'Freelance Web Developer',
       company: 'Self-Employed',
       location: 'Remote',
-      period: '2022 - 2023',
+      period: '2022 - Present',
       type: 'work',
       description: 'Built custom websites and web applications for small businesses and startups. Managed end-to-end project delivery from requirements gathering to deployment.',
-      technologies: ['PHP', 'WordPress', 'JavaScript', 'MySQL'],
+      technologies: ['ExpressJs', 'ReactJs', 'NodeJs', 'MongoDb'],
       icon: Briefcase
     },
-    {
-      title: 'Programming Competitions',
-      company: 'Various Platforms',
-      location: 'Online',
-      period: '2021 - 2022',
-      type: 'achievement',
-      description: 'Participated in multiple programming contests and hackathons. Developed problem-solving skills and algorithmic thinking.',
-      technologies: ['Python', 'C++', 'Data Structures', 'Algorithms'],
-      icon: Award
-    }
+    
   ]
 
   const getTypeColor = (type) => {
     switch (type) {
-      case 'work':
-        return 'from-blue-500 to-blue-600'
       case 'internship':
         return 'from-green-500 to-green-600'
       case 'education':
