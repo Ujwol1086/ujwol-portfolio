@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Mail, Linkedin, Github, Download } from 'lucide-react'
+import { Mail, Linkedin, Github, Download, Phone } from 'lucide-react'
 import Section from './Section'
 import SectionTitle from './SectionTitle'
 
@@ -45,9 +45,10 @@ const Contact = () => {
           viewport={{ once: true }}
         >
           {[
-            { icon: Mail, title: 'Email', value: 'ujwol.aryal@example.com', color: 'text-red-500' },
+            { icon: Mail, title: 'Email', value: 'ujwolaryal@gmail.com', color: 'text-red-500' },
             { icon: Linkedin, title: 'LinkedIn', value: 'ujwol-aryal', color: 'text-blue-600' },
-            { icon: Github, title: 'GitHub', value: 'ujwol1086', color: 'text-gray-800 dark:text-gray-200' }
+            { icon: Github, title: 'GitHub', value: 'ujwol1086', color: 'text-gray-800 dark:text-gray-200' },
+            { icon: Phone, title: 'Phone', value: '+977-9848771734', color: 'text-gray-800 dark:text-gray-200' },
           ].map((contact, index) => (
             <motion.div
               key={index}
