@@ -45,21 +45,26 @@ const Contact = () => {
           viewport={{ once: true }}
         >
           {[
-            { icon: Mail, title: 'Email', value: 'ujwolaryal@gmail.com', color: 'text-red-500' },
-            { icon: Linkedin, title: 'LinkedIn', value: 'ujwol-aryal', color: 'text-blue-600' },
-            { icon: Github, title: 'GitHub', value: 'ujwol1086', color: 'text-gray-800 dark:text-gray-200' },
-            { icon: Phone, title: 'Phone', value: '+977-9848771734', color: 'text-gray-800 dark:text-gray-200' },
+            { icon: Mail, title: 'Email', value: 'ujwolaryal@gmail.com', href:"mailto:ujwolaryal@gmail.com", color: 'text-red-500' },
+            { icon: Linkedin, title: 'LinkedIn', value: 'ujwol-aryal', href:"https://www.linkedin.com/in/ujwol-aryal", color: 'text-blue-600' },
+            { icon: Github, title: 'GitHub', value: 'ujwol1086', href:"https://github.com/ujwol1086", color: 'text-gray-800 dark:text-gray-200' },
+            { icon: Phone, title: 'Phone', value: '+977-9848771734', href:"tel:+977-9848771734", color: 'text-gray-800 dark:text-gray-200' },
           ].map((contact, index) => (
-            <motion.div
-              key={index}
-              className="glass p-6 rounded-lg hover:shadow-lg transition-all duration-300"
-              variants={scaleIn}
-              whileHover={{ scale: 1.05, y: -5 }}
-            >
+              <motion.a
+                key={index}
+                href={contact.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass p-6 rounded-lg hover:shadow-lg transition-all duration-300 block cursor-pointer"
+                variants={scaleIn}
+                whileHover={{ scale: 1.05, y: -5 }}
+              >
               <contact.icon className={`w-8 h-8 mx-auto mb-4 ${contact.color}`} />
-              <h3 className="font-semibold text-blue-600 dark:text-blue-400 mb-2">{contact.title}</h3>
-              <p className="text-gray-600 dark:text-gray-300">{contact.value}</p>
-            </motion.div>
+                <h3 className="font-semibold text-blue-600 dark:text-blue-400 mb-2">
+                {contact.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">{contact.value}</p>
+              </motion.a>
           ))}
         </motion.div>
         
