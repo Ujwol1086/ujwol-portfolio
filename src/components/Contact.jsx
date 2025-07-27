@@ -100,7 +100,7 @@ const Contact = () => {
         </motion.div>
 
         <motion.a
-          href=""
+          href="/Ujwol Aryal - Resume.pdf"
           download
           className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-full transition-all duration-300 shadow-lg hover:shadow-xl"
           whileHover={{ scale: 1.05, y: -2 }}
