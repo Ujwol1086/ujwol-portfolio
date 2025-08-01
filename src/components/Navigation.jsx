@@ -32,7 +32,11 @@ const Navigation = ({
 
       {/* Navigation */}
       <motion.nav 
-        className="fixed top-0 w-full z-40 glass backdrop-blur-md border-b border-white/10"
+        className={`fixed top-0 w-full z-40 backdrop-blur-md border-b transition-all duration-300 ${
+          isDarkMode 
+            ? 'bg-black/20 backdrop-blur-md border-white/10 shadow-lg shadow-black/20' 
+            : 'bg-white/80 backdrop-blur-md border-gray-200/50 shadow-lg shadow-gray-200/20'
+        }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6 }}
@@ -77,8 +81,12 @@ const Navigation = ({
                   onClick={() => scrollToSection(item.id)}
                   className={`flex items-center space-x-2 px-3 py-2 rounded-md transition-all duration-300 ${
                     activeSection === item.id
-                      ? 'text-blue-400 bg-blue-500/20'
-                      : 'hover:text-blue-400 hover:bg-blue-500/10'
+                      ? isDarkMode 
+                        ? 'text-blue-400 bg-blue-500/20' 
+                        : 'text-blue-600 bg-blue-500/20'
+                      : isDarkMode
+                        ? 'text-gray-300 hover:text-blue-400 hover:bg-blue-500/10'
+                        : 'text-gray-700 hover:text-blue-600 hover:bg-blue-500/10'
                   }`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -94,7 +102,11 @@ const Navigation = ({
               {/* Theme Toggle */}
               <motion.button
                 onClick={() => setIsDarkMode(!isDarkMode)}
-                className="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                className={`p-2 rounded-md transition-colors ${
+                  isDarkMode 
+                    ? 'text-gray-300 hover:bg-gray-800/50 hover:text-yellow-400' 
+                    : 'text-gray-700 hover:bg-gray-100/50 hover:text-blue-600'
+                }`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -104,7 +116,11 @@ const Navigation = ({
               {/* Mobile menu button */}
               <motion.button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="md:hidden p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                className={`md:hidden p-2 rounded-md transition-colors ${
+                  isDarkMode 
+                    ? 'text-gray-300 hover:bg-gray-800/50' 
+                    : 'text-gray-700 hover:bg-gray-100/50'
+                }`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -117,7 +133,11 @@ const Navigation = ({
           <AnimatePresence>
             {isMenuOpen && (
               <motion.div
-                className="md:hidden py-4 border-t border-gray-200 dark:border-gray-700"
+                className={`md:hidden py-4 border-t transition-colors ${
+                  isDarkMode 
+                    ? 'border-gray-700/50' 
+                    : 'border-gray-200/50'
+                }`}
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
@@ -134,7 +154,11 @@ const Navigation = ({
                   <motion.button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className="flex items-center space-x-3 w-full text-left px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md"
+                    className={`flex items-center space-x-3 w-full text-left px-4 py-3 rounded-md transition-colors ${
+                      isDarkMode 
+                        ? 'text-gray-300 hover:bg-gray-800/50' 
+                        : 'text-gray-700 hover:bg-gray-100/50'
+                    }`}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3, delay: index * 0.1 }}

@@ -70,6 +70,7 @@ function App() {
         <Hero
           scrollYProgress={scrollYProgress}
           scrollToSection={scrollToSection}
+          isDarkMode={isDarkMode}
         />
 
         <About />

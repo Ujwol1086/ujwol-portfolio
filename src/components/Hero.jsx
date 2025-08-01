@@ -2,7 +2,7 @@ import { motion, useTransform } from "framer-motion";
 import Ujwol from "../assets/Profile.jpg";
 import { useState, useEffect } from "react";
 
-const Hero = ({ scrollYProgress, scrollToSection }) => {
+const Hero = ({ scrollYProgress, scrollToSection, isDarkMode }) => {
   // Typewriter effect state
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [currentText, setCurrentText] = useState("");
@@ -69,11 +69,13 @@ const Hero = ({ scrollYProgress, scrollToSection }) => {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center px-4 pt-20 relative overflow-hidden"
+      className={`min-h-screen flex items-center justify-center px-4 pt-20 relative overflow-hidden ${
+        isDarkMode ? 'bg-transparent' : 'bg-white'
+      }`}
     >
       {/* Background Elements */}
       <motion.div
-        className="absolute inset-0 opacity-20"
+        className={`absolute inset-0 ${isDarkMode ? 'opacity-20' : 'opacity-5'}`}
         style={{ y: backgroundY }}
       >
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse" />
@@ -115,7 +117,7 @@ const Hero = ({ scrollYProgress, scrollToSection }) => {
             </motion.div>
 
             <motion.h1
-              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
+              className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-400'}`}
               {...fadeInUp}
             >
               Hi, I'm <span className="gradient-text">Ujwol Aryal</span>
@@ -128,12 +130,12 @@ const Hero = ({ scrollYProgress, scrollToSection }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <div className="text-2xl md:text-3xl lg:text-4xl font-semibold text-blue-600 dark:text-blue-400">
+              <div className={`text-2xl md:text-3xl lg:text-4xl font-semibold ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>
                 <span className="font-mono">I'm a </span>
                 <span className="relative">
                   {currentText}
                   <motion.span
-                    className="inline-block w-0.5 h-8 md:h-10 bg-blue-600 dark:bg-blue-400 ml-1"
+                    className={`inline-block w-0.5 h-8 md:h-10 ml-1 ${isDarkMode ? 'bg-blue-400' : 'bg-blue-600'}`}
                     animate={{ opacity: [0, 1, 0] }}
                     transition={{ duration: 1, repeat: Infinity }}
                   />
@@ -142,14 +144,14 @@ const Hero = ({ scrollYProgress, scrollToSection }) => {
             </motion.div>
 
             <motion.p
-              className="text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0"
+              className={`text-lg md:text-xl lg:text-2xl mb-8 max-w-2xl mx-auto lg:mx-0 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
               Innovative IT Professional & Full Stack Developer passionate about
               creating
-              <span className="text-blue-500 font-semibold">
+              <span className={`font-semibold ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>
                 {" "}
                 digital solutions
               </span>{" "}
@@ -172,7 +174,11 @@ const Hero = ({ scrollYProgress, scrollToSection }) => {
               </motion.button>
               <motion.button
                 onClick={() => scrollToSection("contact")}
-                className="px-8 py-3 border-2 border-blue-600 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white rounded-full transition-all duration-300"
+                className={`px-8 py-3 border-2 rounded-full transition-all duration-300 ${
+                  isDarkMode 
+                    ? 'border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white' 
+                    : 'border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white'
+                }`}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -201,8 +207,14 @@ const Hero = ({ scrollYProgress, scrollToSection }) => {
                 transition={{ duration: 0.3 }}
               >
                 {/* Developer-themed border */}
-                <div className="absolute inset-0 bg-gradient-to-r from-gray-800 via-blue-900 to-gray-800 rounded-lg p-[3px]">
-                  <div className="w-full h-full bg-white dark:bg-gray-900 rounded-lg overflow-hidden">
+                <div className={`absolute inset-0 rounded-lg p-[3px] ${
+                  isDarkMode 
+                    ? 'bg-gradient-to-r from-gray-800 via-blue-900 to-gray-800' 
+                    : 'bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600'
+                }`}>
+                  <div className={`w-full h-full rounded-lg overflow-hidden ${
+                    isDarkMode ? 'bg-gray-900' : 'bg-white'
+                  }`}>
                     <img
                       src={Ujwol}
                       alt="Ujwol Aryal - Full Stack Developer"
@@ -330,12 +342,16 @@ const Hero = ({ scrollYProgress, scrollToSection }) => {
         transition={{ delay: 1 }}
       >
         <motion.div
-          className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center"
+          className={`w-6 h-10 border-2 rounded-full flex justify-center ${
+            isDarkMode ? 'border-gray-400' : 'border-gray-600'
+          }`}
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
           <motion.div
-            className="w-1 h-3 bg-gray-400 rounded-full mt-2"
+            className={`w-1 h-3 rounded-full mt-2 ${
+              isDarkMode ? 'bg-gray-400' : 'bg-gray-600'
+            }`}
             animate={{ y: [0, 12, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
           />
