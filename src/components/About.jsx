@@ -3,14 +3,14 @@ import { Code, Server, Database, Palette } from 'lucide-react'
 import Section from './Section'
 import SectionTitle from './SectionTitle'
 
-const About = () => {
+const About = ({ isDarkMode }) => {
   const techStack = [
-    { name: 'React', icon: Code, color: 'text-blue-400', bg: 'bg-blue-500/20' },
-    { name: 'Node.js', icon: Server, color: 'text-green-400', bg: 'bg-green-500/20' },
-    { name: 'JavaScript', icon: Code, color: 'text-yellow-400', bg: 'bg-yellow-500/20' },
-    { name: 'MongoDB', icon: Database, color: 'text-green-500', bg: 'bg-green-600/20' },
-    { name: 'PHP', icon: Server, color: 'text-purple-400', bg: 'bg-purple-500/20' },
-    { name: 'CSS/Design', icon: Palette, color: 'text-orange-400', bg: 'bg-orange-500/20' },
+    { name: 'React', icon: Code, color: isDarkMode ? 'text-blue-400' : 'text-blue-600', bg: 'bg-blue-500/20' },
+    { name: 'Node.js', icon: Server, color: isDarkMode ? 'text-green-400' : 'text-green-600', bg: 'bg-green-500/20' },
+    { name: 'JavaScript', icon: Code, color: isDarkMode ? 'text-yellow-400' : 'text-yellow-600', bg: 'bg-yellow-500/20' },
+    { name: 'MongoDB', icon: Database, color: isDarkMode ? 'text-green-500' : 'text-green-700', bg: 'bg-green-600/20' },
+    { name: 'PHP', icon: Server, color: isDarkMode ? 'text-purple-400' : 'text-purple-600', bg: 'bg-purple-500/20' },
+    { name: 'CSS/Design', icon: Palette, color: isDarkMode ? 'text-orange-400' : 'text-orange-600', bg: 'bg-orange-500/20' },
   ]
 
   const slideInLeft = {
@@ -46,7 +46,7 @@ const About = () => {
   }
 
   return (
-    <Section id="about" className="py-20 px-4 bg-white/50 dark:bg-gray-800/50">
+    <Section id="about" className={`py-20 px-4 relative ${isDarkMode ? 'bg-gray-800 !bg-gray-800' : 'bg-white !bg-white'} shadow-lg`}>
       <div className="max-w-6xl mx-auto">
         <SectionTitle>About Me</SectionTitle>
         
@@ -58,7 +58,7 @@ const About = () => {
             whileInView="animate"
             viewport={{ once: true }}
           >
-            <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p className={`text-lg leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
               Innovative, passionate, and detail-oriented professional with a solid foundation 
               in Information Technology. I specialize in aligning technology solutions with 
               business objectives and creating user-centric applications.
@@ -79,13 +79,17 @@ const About = () => {
               ].map((item, index) => (
                 <motion.div
                   key={index}
-                  className="glass p-4 rounded-lg hover:shadow-lg transition-all duration-300"
+                  className={`p-4 rounded-lg hover:shadow-lg transition-all duration-300 ${
+                    isDarkMode 
+                      ? 'bg-black/25 backdrop-blur-20 border border-white/10 shadow-lg' 
+                      : 'bg-white/15 backdrop-blur-20 border border-white/20 shadow-lg'
+                  }`}
                   variants={fadeInUp}
                   whileHover={{ scale: 1.05, y: -5 }}
                 >
-                  <item.icon className="w-6 h-6 text-blue-600 dark:text-blue-400 mb-2" />
-                  <h4 className="font-semibold text-blue-600 dark:text-blue-400">{item.title}</h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">{item.desc}</p>
+                  <item.icon className={`w-6 h-6 mb-2 ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`} />
+                  <h4 className={`font-semibold ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>{item.title}</h4>
+                  <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>{item.desc}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -101,7 +105,11 @@ const About = () => {
             {techStack.map((tech, index) => (
               <motion.div
                 key={index}
-                className={`glass p-6 rounded-lg text-center hover:shadow-lg transition-all duration-300 ${tech.bg}`}
+                className={`p-6 rounded-lg text-center hover:shadow-lg transition-all duration-300 ${
+                  isDarkMode 
+                    ? 'bg-black/25 backdrop-blur-20 border border-white/10 shadow-lg' 
+                    : 'bg-white/15 backdrop-blur-20 border border-white/20 shadow-lg'
+                }`}
                 variants={scaleIn}
                 whileInView="animate"
                 initial="initial"

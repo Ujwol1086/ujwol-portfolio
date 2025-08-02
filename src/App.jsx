@@ -73,7 +73,7 @@ function App() {
           isDarkMode={isDarkMode}
         />
 
-        <About />
+        <About isDarkMode={isDarkMode} />
 
         <Experience />
 
