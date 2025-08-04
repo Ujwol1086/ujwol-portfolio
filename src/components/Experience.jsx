@@ -3,7 +3,7 @@ import { Calendar, MapPin, Briefcase, Code, GraduationCap, Award } from 'lucide-
 import Section from './Section'
 import SectionTitle from './SectionTitle'
 
-const Experience = () => {
+const Experience = ({ isDarkMode }) => {
   const experiences = [
     {
       title: 'Full Stack Developer Intern',
@@ -54,10 +54,22 @@ const Experience = () => {
 
   const getTypeBadge = (type) => {
     const badges = {
-      work: { text: 'Work', bg: 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200' },
-      internship: { text: 'Internship', bg: 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200' },
-      education: { text: 'Education', bg: 'bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200' },
-      achievement: { text: 'Achievement', bg: 'bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200' }
+      work: { 
+        text: 'Work', 
+        bg: isDarkMode ? 'bg-blue-900 text-blue-200' : 'bg-blue-100 text-blue-800' 
+      },
+      internship: { 
+        text: 'Internship', 
+        bg: isDarkMode ? 'bg-green-900 text-green-200' : 'bg-green-100 text-green-800' 
+      },
+      education: { 
+        text: 'Education', 
+        bg: isDarkMode ? 'bg-purple-900 text-purple-200' : 'bg-purple-100 text-purple-800' 
+      },
+      achievement: { 
+        text: 'Achievement', 
+        bg: isDarkMode ? 'bg-yellow-900 text-yellow-200' : 'bg-yellow-100 text-yellow-800' 
+      }
     }
     return badges[type] || badges.work
   }
@@ -106,7 +118,7 @@ const Experience = () => {
   }
 
   return (
-    <Section id="experience" className="py-20 px-4 bg-white/50 dark:bg-gray-800/50">
+    <Section id="experience" className={`py-20 px-4 relative ${isDarkMode ? 'bg-gray-800 !bg-gray-800' : 'bg-white !bg-white'} shadow-lg`}>
       <div className="max-w-4xl mx-auto">
         <SectionTitle>Professional Journey</SectionTitle>
         
@@ -150,17 +162,21 @@ const Experience = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  <div className="glass p-6 rounded-lg hover:shadow-xl transition-all duration-300 group">
+                                     <div className={`p-6 rounded-lg hover:shadow-xl transition-all duration-300 group ${
+                     isDarkMode 
+                       ? 'bg-black/25 backdrop-blur-20 border border-white/10 shadow-lg' 
+                       : 'bg-white/15 backdrop-blur-20 border border-white/20 shadow-lg'
+                   }`}>
                     <div className="flex flex-wrap items-center justify-between mb-4">
                       <div className="flex items-center space-x-3">
-                        <h3 className="text-xl font-semibold text-blue-600 dark:text-blue-400">
+                                                 <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>
                           {exp.title}
                         </h3>
                         <span className={`px-2 py-1 text-xs rounded-full ${getTypeBadge(exp.type).bg}`}>
                           {getTypeBadge(exp.type).text}
                         </span>
                       </div>
-                      <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
+                                             <div className={`flex items-center space-x-4 text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                         <div className="flex items-center">
                           <Calendar className="w-4 h-4 mr-1" />
                           {exp.period}
@@ -172,11 +188,11 @@ const Experience = () => {
                       </div>
                     </div>
                     
-                    <h4 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-3">
+                                         <h4 className={`text-lg font-medium mb-3 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                       {exp.company}
                     </h4>
                     
-                    <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+                                         <p className={`mb-4 leading-relaxed ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                       {exp.description}
                     </p>
                     
@@ -184,7 +200,7 @@ const Experience = () => {
                       {exp.technologies.map((tech, techIndex) => (
                         <motion.span
                           key={techIndex}
-                          className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm rounded-full"
+                                                     className={`px-3 py-1 text-sm rounded-full ${isDarkMode ? 'bg-blue-900 text-blue-200' : 'bg-blue-100 text-blue-800'}`}
                           initial={{ opacity: 0, scale: 0.8 }}
                           whileInView={{ opacity: 1, scale: 1 }}
                           viewport={{ once: true }}
