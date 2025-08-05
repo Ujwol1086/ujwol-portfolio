@@ -11,7 +11,8 @@ import {
   Phone,
   Award
 } from 'lucide-react'
-import UjwolLogo from '../assets/Ujwol_logo.png'
+import UjwolLogoDark from '../assets/Ujwol_logo.png'
+import UjwolLogoLight from '../assets/Ujwol_logo_b.png'
 
 const Navigation = ({ 
   activeSection, 
@@ -51,7 +52,7 @@ const Navigation = ({
               style={{ cursor: 'pointer' }}
             >
               <img 
-                src={UjwolLogo} 
+                src={isDarkMode ? UjwolLogoDark : UjwolLogoLight} 
                 alt="Ujwol Aryal Logo" 
                 className="h-10 w-40 object-contain"
                 onError={(e) => {
