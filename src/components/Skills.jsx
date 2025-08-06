@@ -3,7 +3,7 @@ import { Code, Server, Database, Palette, User, Briefcase, Award } from 'lucide-
 import Section from './Section'
 import SectionTitle from './SectionTitle'
 
-const Skills = () => {
+const Skills = ({ isDarkMode }) => {
   const skills = [
     { name: 'Frontend Development', level: 90, icon: Code },
     { name: 'Backend Development', level: 85, icon: Server },
@@ -35,7 +35,7 @@ const Skills = () => {
   }
 
   return (
-    <Section id="skills" className="py-20 px-4">
+    <Section id="skills" className={`py-20 px-4 relative ${isDarkMode ? 'bg-gray-800 !bg-gray-800' : 'bg-white !bg-white'} shadow-lg`}>
       <div className="max-w-6xl mx-auto">
         <SectionTitle>Skills & Expertise</SectionTitle>
         
@@ -46,7 +46,7 @@ const Skills = () => {
             whileInView="animate"
             viewport={{ once: true }}
           >
-            <h3 className="text-2xl font-semibold mb-6 text-blue-600 dark:text-blue-400 flex items-center">
+            <h3 className={`text-2xl font-semibold mb-6 flex items-center ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>
               <Code className="mr-3" />
               Technical Skills
             </h3>
@@ -63,11 +63,11 @@ const Skills = () => {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
                       <skill.icon className="w-5 h-5 text-blue-500 mr-2" />
-                      <span className="font-medium">{skill.name}</span>
+                      <span className={`font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>{skill.name}</span>
                     </div>
-                    <span className="text-sm text-gray-500">{skill.level}%</span>
+                    <span className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>{skill.level}%</span>
                   </div>
-                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                  <div className={`w-full rounded-full h-2 ${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'}`}>
                     <motion.div
                       className="h-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
                       initial={{ width: 0 }}
@@ -87,7 +87,7 @@ const Skills = () => {
             whileInView="animate"
             viewport={{ once: true }}
           >
-            <h3 className="text-2xl font-semibold mb-6 text-blue-600 dark:text-blue-400 flex items-center">
+            <h3 className={`text-2xl font-semibold mb-6 flex items-center ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>
               <Award className="mr-3" />
               Certifications
             </h3>
@@ -95,7 +95,11 @@ const Skills = () => {
               {certifications.map((cert, index) => (
                 <motion.div
                   key={index}
-                  className="p-4 glass rounded-lg hover:shadow-lg transition-all duration-300"
+                  className={`p-4 rounded-lg hover:shadow-lg transition-all duration-300 ${
+                    isDarkMode 
+                      ? 'bg-black/25 backdrop-blur-20 border border-white/10 shadow-lg' 
+                      : 'bg-white/15 backdrop-blur-20 border border-white/20 shadow-lg'
+                  }`}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -104,7 +108,7 @@ const Skills = () => {
                 >
                   <div className="flex items-center">
                     <Award className="w-5 h-5 text-yellow-500 mr-3" />
-                    <span className="font-medium">{cert}</span>
+                    <span className={`font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>{cert}</span>
                   </div>
                 </motion.div>
               ))}

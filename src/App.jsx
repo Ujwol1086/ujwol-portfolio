@@ -77,7 +77,7 @@ function App() {
 
         <Experience isDarkMode={isDarkMode} />
 
-        <Skills />
+        <Skills isDarkMode={isDarkMode} />
 
         <Projects />
 
