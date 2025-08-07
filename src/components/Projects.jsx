@@ -3,7 +3,7 @@ import { ExternalLink } from 'lucide-react'
 import Section from './Section'
 import SectionTitle from './SectionTitle'
 
-const Projects = () => {
+const Projects = ({ isDarkMode }) => {
   const projects = [
     {
       title: 'E-commerce Platform',
@@ -64,7 +64,7 @@ const Projects = () => {
   }
 
   return (
-    <Section id="projects" className="py-20 px-4">
+    <Section id="projects" className={`py-20 px-4 relative ${isDarkMode ? 'bg-gray-800 !bg-gray-800' : 'bg-white !bg-white'} shadow-lg`}>
       <div className="max-w-6xl mx-auto">
         <SectionTitle>Featured Projects</SectionTitle>
         
@@ -78,7 +78,11 @@ const Projects = () => {
           {projects.map((project, index) => (
             <motion.div
               key={index}
-              className="glass p-6 rounded-lg hover:shadow-xl transition-all duration-300 group"
+              className={`p-6 rounded-lg hover:shadow-xl transition-all duration-300 group ${
+                isDarkMode 
+                  ? 'bg-black/25 backdrop-blur-20 border border-white/10 shadow-lg' 
+                  : 'bg-white/15 backdrop-blur-20 border border-white/20 shadow-lg'
+              }`}
               variants={scaleIn}
               whileHover={{ scale: 1.05, y: -10 }}
             >
@@ -87,19 +91,19 @@ const Projects = () => {
               </div>
               
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-semibold text-blue-600 dark:text-blue-400">
+                <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>
                   {project.title}
                 </h3>
                 <span className={`px-2 py-1 text-xs rounded-full ${
                   project.status === 'Completed' 
-                    ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200'
-                    : 'bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200'
+                    ? isDarkMode ? 'bg-green-900 text-green-200' : 'bg-green-100 text-green-800'
+                    : isDarkMode ? 'bg-yellow-900 text-yellow-200' : 'bg-yellow-100 text-yellow-800'
                 }`}>
                   {project.status}
                 </span>
               </div>
               
-              <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm">
+              <p className={`mb-4 text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                 {project.description}
               </p>
               
@@ -107,7 +111,7 @@ const Projects = () => {
                 {project.tech.map((tech, techIndex) => (
                   <span
                     key={techIndex}
-                    className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full"
+                    className={`px-2 py-1 text-xs rounded-full ${isDarkMode ? 'bg-blue-900 text-blue-200' : 'bg-blue-100 text-blue-800'}`}
                   >
                     {tech}
                   </span>
@@ -116,7 +120,7 @@ const Projects = () => {
               
               <a href={project.link} target="_blank" rel="noopener noreferrer">
                 <motion.button
-                className="flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
+                className={`flex items-center transition-colors ${isDarkMode ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-700'}`}
                 whileHover={{ x: 5 }}
               >
                 View Project <ExternalLink className="ml-2 w-4 h-4" />

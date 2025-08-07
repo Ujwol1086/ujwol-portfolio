@@ -79,7 +79,7 @@ function App() {
 
         <Skills isDarkMode={isDarkMode} />
 
-        <Projects />
+        <Projects isDarkMode={isDarkMode} />
 
         <Contact />
 
