@@ -81,7 +81,7 @@ function App() {
 
         <Projects isDarkMode={isDarkMode} />
 
-        <Contact />
+        <Contact isDarkMode={isDarkMode} />
 
         <Footer />
         

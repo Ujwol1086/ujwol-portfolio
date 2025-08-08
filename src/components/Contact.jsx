@@ -3,7 +3,7 @@ import { Mail, Linkedin, Github, Download, Phone } from "lucide-react";
 import Section from "./Section";
 import SectionTitle from "./SectionTitle";
 
-const Contact = () => {
+const Contact = ({ isDarkMode }) => {
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
     animate: { opacity: 1, y: 0 },
@@ -27,13 +27,13 @@ const Contact = () => {
   return (
     <Section
       id="contact"
-      className="py-20 px-4 bg-white/50 dark:bg-gray-800/50"
+      className={`py-20 px-4 relative ${isDarkMode ? 'bg-gray-800 !bg-gray-800' : 'bg-white !bg-white'} shadow-lg`}
     >
       <div className="max-w-4xl mx-auto text-center">
         <SectionTitle>Let's Connect</SectionTitle>
 
         <motion.p
-          className="text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto"
+          className={`text-xl mb-12 max-w-2xl mx-auto ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}
           {...fadeInUp}
         >
           I'm always interested in new opportunities and exciting projects.
@@ -67,14 +67,14 @@ const Contact = () => {
               title: "GitHub",
               value: "ujwol1086",
               href: "https://github.com/ujwol1086",
-              color: "text-gray-800 dark:text-gray-200",
+              color: isDarkMode ? "text-gray-200" : "text-gray-800",
             },
             {
               icon: Phone,
               title: "Phone",
               value: "+977-9848771734",
               href: "tel:+977-9848771734",
-              color: "text-gray-800 dark:text-gray-200",
+              color: isDarkMode ? "text-gray-200" : "text-gray-800",
             },
           ].map((contact, index) => (
             <motion.a
@@ -82,17 +82,21 @@ const Contact = () => {
               href={contact.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="glass p-6 rounded-lg hover:shadow-lg transition-all duration-300 block cursor-pointer"
+              className={`p-6 rounded-lg hover:shadow-lg transition-all duration-300 block cursor-pointer ${
+                isDarkMode 
+                  ? 'bg-black/25 backdrop-blur-20 border border-white/10 shadow-lg' 
+                  : 'bg-white/15 backdrop-blur-20 border border-white/20 shadow-lg'
+              }`}
               variants={scaleIn}
               whileHover={{ scale: 1.05, y: -5 }}
             >
               <contact.icon
                 className={`w-8 h-8 mx-auto mb-4 ${contact.color}`}
               />
-              <h3 className="font-semibold text-blue-600 dark:text-blue-400 mb-2">
+              <h3 className={`font-semibold mb-2 ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>
                 {contact.title}
               </h3>
-              <p className="text-gray-600 dark:text-gray-300">
+              <p className={`${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                 {contact.value}
               </p>
             </motion.a>
