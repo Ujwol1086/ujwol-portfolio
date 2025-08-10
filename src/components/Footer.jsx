@@ -10,7 +10,7 @@ const Footer = ({ isDarkMode }) => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          © 2024 Ujwol Aryal. Built with React, Tailwind CSS & Framer Motion.
+          2024 &copy; Ujwol Aryal
         </motion.p>
       </div>
     </footer>
