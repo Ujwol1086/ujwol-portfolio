@@ -27,7 +27,7 @@ const Contact = ({ isDarkMode }) => {
   return (
     <Section
       id="contact"
-      className={`py-20 px-4 relative ${isDarkMode ? 'bg-gray-800 !bg-gray-800' : 'bg-white !bg-white'} shadow-lg`}
+      className={`py-20 px-4 relative ${isDarkMode ? 'bg-gray-800 ' : 'bg-white '} shadow-lg`}
     >
       <div className="max-w-4xl mx-auto text-center">
         <SectionTitle>Let's Connect</SectionTitle>

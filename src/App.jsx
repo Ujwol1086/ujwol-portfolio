@@ -83,7 +83,7 @@ function App() {
 
         <Contact isDarkMode={isDarkMode} />
 
-        <Footer isDarkMode={isDarkMode} />
+        <Footer />
         
         <BackToTop />
       </div>
