@@ -1,12 +1,310 @@
 import { motion, useTransform } from "framer-motion";
 import Ujwol from "../assets/Profile.jpg";
 import { useState, useEffect } from "react";
+import { Canvas } from '@react-three/fiber';
+import { Suspense, useRef, useMemo } from 'react';
+import { useFrame, useThree } from '@react-three/fiber';
+import { Float, Sparkles } from '@react-three/drei';
+import * as THREE from 'three';
 
 const Hero = ({ scrollYProgress, scrollToSection, isDarkMode }) => {
   // Typewriter effect state
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [currentText, setCurrentText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
+
+  // Three.js Components with proper animation patterns
+  const FloatingShapes = ({ count = 30 }) => {
+    const meshRef = useRef();
+    const shapes = useMemo(() => {
+      const temp = [];
+      for (let i = 0; i < count; i++) {
+        const time = Math.random() * 100;
+        const factor = Math.random() * 20 + 10;
+        const scale = Math.random() * 0.5 + 0.5;
+        const geometry = Math.random() > 0.5 ? 'box' : 'sphere';
+        const initialPosition = [
+          (Math.random() - 0.5) * 25,
+          (Math.random() - 0.5) * 25,
+          (Math.random() - 0.5) * 25
+        ];
+        temp.push({ time, factor, scale, geometry, id: i, initialPosition });
+      }
+      return temp;
+    }, [count]);
+
+    useFrame((state) => {
+      const time = state.clock.elapsedTime;
+      
+      shapes.forEach((shape, i) => {
+        if (meshRef.current) {
+          const mesh = meshRef.current.children[i];
+          if (mesh) {
+            // Smooth position animation using sine waves
+            const t = time - shape.time;
+            mesh.position.y = shape.initialPosition[1] + Math.sin(t / shape.factor) * 3;
+            mesh.position.x = shape.initialPosition[0] + Math.sin(t / (shape.factor * 1.5)) * 2;
+            
+            // Rotation animation
+            mesh.rotation.x = Math.sin(t / 10) * 0.5;
+            mesh.rotation.y = Math.sin(t / 15) * 0.5;
+            mesh.rotation.z = Math.sin(t / 20) * 0.3;
+            
+            // Scale animation
+            const scaleVariation = Math.sin(t / 8) * 0.1;
+            mesh.scale.setScalar(shape.scale + scaleVariation);
+          }
+        }
+      });
+    });
+
+    return (
+      <group ref={meshRef}>
+        {shapes.map((shape) => (
+          <mesh
+            key={shape.id}
+            position={shape.initialPosition}
+            geometry={shape.geometry === 'box' ? 
+              new THREE.BoxGeometry(0.5, 0.5, 0.5) : 
+              new THREE.SphereGeometry(0.3, 16, 16)
+            }
+          >
+            <meshStandardMaterial 
+              color={new THREE.Color().setHSL(
+                Math.random() * 0.3 + 0.5, 
+                0.8, 
+                0.6
+              )}
+              transparent
+              opacity={0.6}
+              metalness={0.8}
+              roughness={0.2}
+            />
+          </mesh>
+        ))}
+      </group>
+    );
+  };
+
+  const InteractiveParticles = ({ count = 500 }) => {
+    const points = useRef();
+    const particlesRef = useRef();
+    
+    // Create particle system with proper Three.js patterns
+    const particles = useMemo(() => {
+      const positions = new Float32Array(count * 3);
+      const velocities = new Float32Array(count * 3);
+      const colors = new Float32Array(count * 3);
+      
+      for (let i = 0; i < count; i++) {
+        const i3 = i * 3;
+        
+        // Initial positions
+        positions[i3] = (Math.random() - 0.5) * 20;
+        positions[i3 + 1] = (Math.random() - 0.5) * 20;
+        positions[i3 + 2] = (Math.random() - 0.5) * 20;
+        
+        // Velocities for smooth movement
+        velocities[i3] = (Math.random() - 0.5) * 0.01;
+        velocities[i3 + 1] = (Math.random() - 0.5) * 0.01;
+        velocities[i3 + 2] = (Math.random() - 0.5) * 0.01;
+        
+        // Colors based on theme
+        const hue = isDarkMode ? 0.6 : 0.7; // Blue to purple
+        const color = new THREE.Color().setHSL(hue, 0.8, 0.6);
+        colors[i3] = color.r;
+        colors[i3 + 1] = color.g;
+        colors[i3 + 2] = color.b;
+      }
+      
+      return { positions, velocities, colors };
+    }, [count, isDarkMode]);
+
+    useFrame((state) => {
+      if (points.current && particlesRef.current) {
+        const time = state.clock.elapsedTime;
+        const positions = particlesRef.current.positions;
+        const velocities = particlesRef.current.velocities;
+        
+        // Update particle positions with smooth animation
+        for (let i = 0; i < count; i++) {
+          const i3 = i * 3;
+          
+          // Add velocity
+          positions[i3] += velocities[i3];
+          positions[i3 + 1] += velocities[i3 + 1];
+          positions[i3 + 2] += velocities[i3 + 2];
+          
+          // Add wave motion
+          positions[i3 + 1] += Math.sin(time * 0.5 + i * 0.1) * 0.002;
+          positions[i3] += Math.cos(time * 0.3 + i * 0.1) * 0.002;
+          
+          // Boundary checking with smooth wrapping
+          if (Math.abs(positions[i3]) > 10) {
+            positions[i3] = -Math.sign(positions[i3]) * 10;
+          }
+          if (Math.abs(positions[i3 + 1]) > 10) {
+            positions[i3 + 1] = -Math.sign(positions[i3 + 1]) * 10;
+          }
+          if (Math.abs(positions[i3 + 2]) > 10) {
+            positions[i3 + 2] = -Math.sign(positions[i3 + 2]) * 10;
+          }
+        }
+        
+        // Update geometry attributes
+        points.current.geometry.attributes.position.array = positions;
+        points.current.geometry.attributes.position.needsUpdate = true;
+      }
+    });
+
+    return (
+      <points ref={points}>
+        <bufferGeometry>
+          <bufferAttribute
+            attach="attributes-position"
+            count={count}
+            array={particles.positions}
+            itemSize={3}
+          />
+          <bufferAttribute
+            attach="attributes-color"
+            count={count}
+            array={particles.colors}
+            itemSize={3}
+          />
+        </bufferGeometry>
+        <pointsMaterial
+          size={0.03}
+          vertexColors
+          transparent
+          opacity={0.8}
+          sizeAttenuation
+          blending={THREE.AdditiveBlending}
+        />
+        <group ref={particlesRef} userData={{ positions: particles.positions, velocities: particles.velocities }} />
+      </points>
+    );
+  };
+
+  // Animated geometric rings component
+  const AnimatedRings = ({ isDarkMode }) => {
+    const ringsRef = useRef();
+    const ringCount = 3;
+
+    useFrame((state) => {
+      const time = state.clock.elapsedTime;
+      
+      if (ringsRef.current) {
+        ringsRef.current.children.forEach((ring, index) => {
+          const speed = 0.5 + index * 0.2;
+          const scale = 1 + Math.sin(time * speed) * 0.1;
+          const rotation = time * (0.3 + index * 0.1);
+          
+          ring.scale.setScalar(scale);
+          ring.rotation.z = rotation;
+          ring.rotation.x = Math.sin(time * 0.2) * 0.1;
+        });
+      }
+    });
+
+    return (
+      <group ref={ringsRef}>
+        {Array.from({ length: ringCount }, (_, i) => (
+          <mesh key={i} position={[0, 0, -5 - i * 2]}>
+            <ringGeometry args={[2 + i * 1.5, 2.2 + i * 1.5, 32]} />
+            <meshBasicMaterial 
+              color={isDarkMode ? 
+                new THREE.Color().setHSL(0.6 + i * 0.1, 0.8, 0.6) :
+                new THREE.Color().setHSL(0.7 + i * 0.1, 0.8, 0.6)
+              }
+              transparent
+              opacity={0.3 - i * 0.05}
+              side={THREE.DoubleSide}
+            />
+          </mesh>
+        ))}
+      </group>
+    );
+  };
+
+  const ThreeJSBackground = () => {
+    const { camera, scene } = useThree();
+    const lightsRef = useRef();
+
+    useFrame((state) => {
+      const time = state.clock.elapsedTime;
+      
+      // Smooth camera movement with easing
+      const cameraX = Math.sin(time * 0.1) * 2;
+      const cameraY = Math.cos(time * 0.15) * 1;
+      
+      camera.position.x += (cameraX - camera.position.x) * 0.02;
+      camera.position.y += (cameraY - camera.position.y) * 0.02;
+      camera.lookAt(0, 0, 0);
+      
+      // Animate lights for dynamic lighting
+      if (lightsRef.current) {
+        const directionalLight = lightsRef.current.children[0];
+        const pointLight = lightsRef.current.children[1];
+        
+        if (directionalLight) {
+          directionalLight.position.x = Math.sin(time * 0.2) * 15;
+          directionalLight.position.z = Math.cos(time * 0.2) * 15;
+        }
+        
+        if (pointLight) {
+          pointLight.intensity = 0.3 + Math.sin(time * 0.5) * 0.2;
+        }
+      }
+    });
+
+    return (
+      <>
+        {/* Enhanced lighting system */}
+        <group ref={lightsRef}>
+          <ambientLight intensity={0.3} />
+          <directionalLight 
+            position={[10, 10, 5]} 
+            intensity={1.2} 
+            color={isDarkMode ? "#1e40af" : "#3b82f6"}
+            castShadow
+            shadow-mapSize-width={2048}
+            shadow-mapSize-height={2048}
+          />
+          <pointLight 
+            position={[-10, -10, -5]} 
+            intensity={0.6} 
+            color={isDarkMode ? "#8b5cf6" : "#a855f7"}
+            distance={50}
+            decay={2}
+          />
+          <hemisphereLight 
+            intensity={0.2}
+            color={isDarkMode ? "#1e293b" : "#f8fafc"}
+            groundColor={isDarkMode ? "#0f172a" : "#e2e8f0"}
+          />
+        </group>
+
+        {/* Background elements */}
+        <FloatingShapes count={30} />
+        <InteractiveParticles count={500} />
+        
+        {/* Animated geometric rings */}
+        <AnimatedRings isDarkMode={isDarkMode} />
+        
+        {/* Enhanced sparkles effect */}
+        <Sparkles 
+          count={150} 
+          scale={15} 
+          size={3} 
+          speed={0.4}
+          color={isDarkMode ? "#3b82f6" : "#8b5cf6"}
+          opacity={0.7}
+          noise={0.8}
+        />
+      </>
+    );
+  };
   
   const roles = [
     "Frontend Developer",
@@ -73,6 +371,35 @@ const Hero = ({ scrollYProgress, scrollToSection, isDarkMode }) => {
         isDarkMode ? 'bg-transparent' : 'bg-white'
       }`}
     >
+      {/* Three.js Background */}
+      <div className="absolute inset-0 -z-10">
+        <Canvas
+          camera={{ 
+            position: [0, 0, 8], 
+            fov: 75,
+            near: 0.1,
+            far: 1000
+          }}
+          gl={{ 
+            antialias: true,
+            alpha: true,
+            powerPreference: "high-performance",
+            stencil: false,
+            depth: true,
+            logarithmicDepthBuffer: false
+          }}
+          style={{ 
+            background: 'transparent'
+          }}
+          performance={{ min: 0.5 }}
+          dpr={[1, 2]}
+        >
+          <Suspense fallback={null}>
+            <ThreeJSBackground />
+          </Suspense>
+        </Canvas>
+      </div>
+
       {/* Background Elements */}
       <motion.div
         className={`absolute inset-0 ${isDarkMode ? 'opacity-20' : 'opacity-5'}`}
