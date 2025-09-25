@@ -1,10 +1,20 @@
 import { motion } from 'framer-motion'
-import { Calendar, MapPin, Briefcase, Code, GraduationCap, Award } from 'lucide-react'
+import { Calendar, MapPin, Briefcase, Code, GraduationCap, Award, Building2 } from 'lucide-react'
 import Section from './Section'
 import SectionTitle from './SectionTitle'
 
 const Experience = ({ isDarkMode }) => {
   const experiences = [
+    {
+      title: 'Junior Full Stack Developer',
+      company: 'Neutrotex Computer IT Solutions and Innovation Pvt. Ltd.',
+      location: 'Onsite',
+      period: '2024 - Present',
+      type: 'Full Time',
+      description: 'Built custom websites and web applications for small businesses and startups. Managed end-to-end project delivery from requirements gathering to deployment.',
+      technologies: ['ExpressJs', 'ReactJs','NextJs', 'NodeJs', 'MongoDb', 'Tailwind','React Native','TypeScript'],
+      icon: Building2
+    },
     {
       title: 'Full Stack Developer Intern',
       company: 'Goma Engineering Consultant Pvt. Ltd.',
@@ -41,10 +51,14 @@ const Experience = ({ isDarkMode }) => {
 
   const getTypeColor = (type) => {
     switch (type) {
+      case 'Full Time':
+        return 'from-blue-500 to-blue-600'
       case 'internship':
         return 'from-green-500 to-green-600'
       case 'education':
         return 'from-purple-500 to-purple-600'
+      case 'work':
+        return 'from-orange-500 to-orange-600'
       case 'achievement':
         return 'from-yellow-500 to-yellow-600'
       default:
@@ -54,9 +68,17 @@ const Experience = ({ isDarkMode }) => {
 
   const getTypeBadge = (type) => {
     const badges = {
-      work: { 
-        text: 'Work', 
+      'Full Time': { 
+        text: 'Full Time', 
         bg: isDarkMode ? 'bg-blue-900 text-blue-200' : 'bg-blue-100 text-blue-800' 
+      },
+      'Part Time': { 
+        text: 'Part Time', 
+        bg: isDarkMode ? 'bg-indigo-900 text-indigo-200' : 'bg-indigo-100 text-indigo-800' 
+      },
+      work: { 
+        text: 'Freelance', 
+        bg: isDarkMode ? 'bg-orange-900 text-orange-200' : 'bg-orange-100 text-orange-800' 
       },
       internship: { 
         text: 'Internship', 
@@ -162,19 +184,26 @@ const Experience = ({ isDarkMode }) => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                                     <div className={`p-6 rounded-lg hover:shadow-xl transition-all duration-300 group ${
+                    <div className={`p-6 rounded-lg hover:shadow-xl transition-all duration-300 group ${
                      isDarkMode 
                        ? 'bg-black/25 backdrop-blur-20 border border-white/10 shadow-lg' 
                        : 'bg-white/15 backdrop-blur-20 border border-white/20 shadow-lg'
-                   }`}>
+                      }`}>
                     <div className="flex flex-wrap items-center justify-between mb-4">
                       <div className="flex items-center space-x-3">
-                                                 <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>
+                        <h3 className={`text-xl font-semibold ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>
                           {exp.title}
                         </h3>
                         <span className={`px-2 py-1 text-xs rounded-full ${getTypeBadge(exp.type).bg}`}>
                           {getTypeBadge(exp.type).text}
                         </span>
+                        {/* {exp.period.includes('Present') && (
+                          <span className={`px-2 py-1 text-xs rounded-full font-semibold ${
+                            isDarkMode ? 'bg-green-900 text-green-200' : 'bg-green-100 text-green-800'
+                          }`}>
+                            Current
+                          </span>
+                        )} */}
                       </div>
                                              <div className={`flex items-center space-x-4 text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                         <div className="flex items-center">
@@ -188,11 +217,11 @@ const Experience = ({ isDarkMode }) => {
                       </div>
                     </div>
                     
-                                         <h4 className={`text-lg font-medium mb-3 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    <h4 className={`text-lg font-medium mb-3 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                       {exp.company}
                     </h4>
                     
-                                         <p className={`mb-4 leading-relaxed ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                    <p className={`mb-4 leading-relaxed ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                       {exp.description}
                     </p>
                     
