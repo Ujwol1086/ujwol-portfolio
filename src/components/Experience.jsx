@@ -22,7 +22,7 @@ const Experience = ({ isDarkMode }) => {
       period: '2024 - Present',
       type: 'internship',
       description: 'Leading development of modern web applications using React, Node.js, and cloud technologies. Collaborated with cross-functional teams to deliver scalable solutions.',
-      technologies: ['React', 'Node.js', 'MongoDB', 'AWS'],
+      technologies: ['React', 'Node.js', 'MongoDB','ExpressJs','TypeScript'],
       icon: Code
     },
    
