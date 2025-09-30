@@ -43,7 +43,7 @@ const Experience = ({ isDarkMode }) => {
       period: '2022 - Present',
       type: 'work',
       description: 'Built custom websites and web applications for small businesses and startups. Managed end-to-end project delivery from requirements gathering to deployment.',
-      technologies: ['ExpressJs', 'ReactJs', 'NodeJs', 'MongoDb'],
+      technologies: ['ExpressJs', 'ReactJs', 'NodeJs', 'MongoDb', 'TypeScript', 'NextJs'],
       icon: Briefcase
     },
     
