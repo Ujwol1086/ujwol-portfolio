@@ -19,7 +19,7 @@ const Experience = ({ isDarkMode }) => {
       title: 'Full Stack Developer Intern',
       company: 'Goma Engineering Consultant Pvt. Ltd.',
       location: 'Remote',
-      period: '2024 - Present',
+      period: '2024 - 2025',
       type: 'internship',
       description: 'Leading development of modern web applications using React, Node.js, and cloud technologies. Collaborated with cross-functional teams to deliver scalable solutions.',
       technologies: ['React', 'Node.js', 'MongoDB','ExpressJs','TypeScript'],

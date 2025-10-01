@@ -17,7 +17,8 @@ const Skills = ({ isDarkMode }) => {
     'MERN Stack Development',
     'Python Intermediate',
     'PHP Beginner',
-    'Adobe Premiere Pro & After Effects',
+    // 'Adobe Premiere Pro & After Effects',
+    'NextJs',
     'Portfolio Management System (C++)',
     'Figma Design'
   ]
