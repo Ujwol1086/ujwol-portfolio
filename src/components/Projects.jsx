@@ -14,12 +14,12 @@ const Projects = ({ isDarkMode }) => {
       link: "https://github.com/Ujwol1086/E-Commerce-MERN-",
     },
     {
-      title: "Food Delivery WebApp",
+      title: "EVConnect Nepal",
       description:
-        "Modern food delivery application with real-time tracking, GPS integration, and seamless user experience",
-      tech: ["React", "Node.js", "MongoDB", "Socket.io", "Maps API"],
-      status: "In Progress",
-      link: "#",
+        "Modern EV Charging Station Detection application with real-time tracking, GPS integration, and seamless user experience",
+      tech: ["React", "Python", "MongoDB", "Maps API"],
+      status: "Completed",
+      link: "https://github.com/Ujwol1086/EV_ChargingStation_And_SlotBooking",
     },
     {
       title: "Interactive Form Builder",
