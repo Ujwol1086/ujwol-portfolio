@@ -17,7 +17,7 @@ const Projects = ({ isDarkMode }) => {
       title: "EVConnect Nepal",
       description:
         "Modern EV Charging Station Detection application with real-time tracking, GPS integration, and seamless user experience",
-      tech: ["React", "Python", "MongoDB", "Maps API"],
+      tech: ["React", "Python", "MongoDB", "Maps API", "Tailwind CSS"],
       status: "Completed",
       link: "https://github.com/Ujwol1086/EV_ChargingStation_And_SlotBooking",
     },
@@ -25,7 +25,7 @@ const Projects = ({ isDarkMode }) => {
       title: "Interactive Form Builder",
       description:
         "Drag-and-drop form builder with dynamic validation, conditional logic, and export functionality",
-      tech: ["React", "TypeScript", "Tailwind", "React DnD"],
+      tech: ["ReactJs", "Tailwind", "React DnD"],
       status: "Completed",
       link: "https://github.com/Ujwol1086/Interactive-Form-Builder-React",
     },
