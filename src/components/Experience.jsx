@@ -33,7 +33,7 @@ const Experience = ({ isDarkMode }) => {
       period: '2021 - Present',
       type: 'education',
       description: 'Graduated with distinction focusing on software development, web technologies, and system design. Completed multiple projects in full-stack development.',
-      technologies: ['Programming', 'Database Design', 'Software Engineering', 'Project Management'],
+      technologies: ['Programming', 'Database Design', 'Software Engineering', 'Project Management', 'DSA'],
       icon: GraduationCap
     },
     {
