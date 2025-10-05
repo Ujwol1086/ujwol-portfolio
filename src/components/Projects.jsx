@@ -25,7 +25,7 @@ const Projects = ({ isDarkMode }) => {
       title: "Interactive Form Builder",
       description:
         "Drag-and-drop form builder with dynamic validation, conditional logic, and export functionality",
-      tech: ["ReactJs", "Tailwind", "React DnD"],
+      tech: ["ReactJs", "Tailwind CSS", "React DnD"],
       status: "Completed",
       link: "https://github.com/Ujwol1086/Interactive-Form-Builder-React",
     },
