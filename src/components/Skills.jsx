@@ -36,7 +36,7 @@ const Skills = ({ isDarkMode }) => {
   }
 
   return (
-    <Section id="skills" className={`py-20 px-4 relative ${isDarkMode ? 'bg-gray-800 !bg-gray-800' : 'bg-white !bg-white'} shadow-lg`}>
+    <Section id="skills" className={`py-20 px-4 relative ${isDarkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg`}>
       <div className="max-w-6xl mx-auto">
         <SectionTitle>Skills & Expertise</SectionTitle>
         
