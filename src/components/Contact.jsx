@@ -125,14 +125,14 @@ const Contact = ({ isDarkMode }) => {
           </motion.p>
 
           <motion.div
-            className={`inline-flex items-center px-6 py-3 rounded-full ${isDarkMode ? 'bg-white/10' : 'bg-gray-200'} ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}
+            className={`inline-flex items-center px-6 py-3 rounded-full ${isDarkMode ? 'bg-green-400' : 'bg-gray-200'} ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
           >
             {/* <Heart className="w-5 h-5 mr-2 text-red-500" /> */}
-            <span className="text-sm font-medium">Currently accepting new projects</span>
+            <span className="text-md font-medium">Currently accepting new projects</span>
           </motion.div>
         </motion.div>
 
