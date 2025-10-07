@@ -80,11 +80,11 @@ const Navigation = ({
                 <motion.button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`flex items-center space-x-2 px-3 py-2 rounded-md transition-all duration-300 ${
+                  className={`flex items-center space-x-2 px-3 py-2 rounded-md transition-all duration-300 cursor-pointer ${
                     activeSection === item.id
                       ? isDarkMode 
-                        ? 'text-blue-400 bg-blue-500/20' 
-                        : 'text-blue-600 bg-blue-500/20'
+                        ? 'text-blue-400 ' 
+                        : 'text-blue-600 '
                       : isDarkMode
                         ? 'text-gray-300 hover:text-blue-400 hover:bg-blue-500/10'
                         : 'text-gray-700 hover:text-blue-600 hover:bg-blue-500/10'
