@@ -552,7 +552,7 @@ const Hero = ({ scrollYProgress, scrollToSection, isDarkMode }) => {
                       }}
                     />
                     {/* Fallback if image doesn't load */}
-                    <div className="w-full h-full bg-gradient-to-br from-gray-800 to-blue-900 flex items-center justify-center text-white text-6xl font-bold hidden">
+                    <div className="w-full h-full bg-gradient-to-br from-gray-800 to-blue-900 flex items-center justify-center text-white text-6xl font-bold ">
                       UA
                     </div>
                   </div>
