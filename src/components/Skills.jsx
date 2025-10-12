@@ -5,7 +5,7 @@ import SectionTitle from './SectionTitle'
 
 const Skills = ({ isDarkMode }) => {
   const skills = [
-    { name: 'Frontend Development', level: 90, icon: Code },
+    { name: 'Frontend Development', level: 95, icon: Code },
     { name: 'Backend Development', level: 85, icon: Server },
     { name: 'Database Management', level: 80, icon: Database },
     { name: 'UI/UX Design', level: 75, icon: Palette },
