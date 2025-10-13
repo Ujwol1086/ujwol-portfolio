@@ -8,9 +8,9 @@ const Skills = ({ isDarkMode }) => {
     { name: 'Frontend Development', level: 95, icon: Code },
     { name: 'Backend Development', level: 85, icon: Server },
     { name: 'Database Management', level: 80, icon: Database },
-    { name: 'UI/UX Design', level: 75, icon: Palette },
+    { name: 'UI/UX Design', level: 65, icon: Palette },
     { name: 'Problem Solving', level: 95, icon: User },
-    { name: 'Team Leadership', level: 80, icon: Briefcase }
+    { name: 'Team Leadership', level: 90, icon: Briefcase }
   ]
 
   const certifications = [
