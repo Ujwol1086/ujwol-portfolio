@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Code, Server, Database, Palette, User, Award, Target, Zap, Globe, Heart, Star, TrendingUp } from 'lucide-react'
-import { FaReact, FaNodeJs, FaJs, FaPhp, FaFigma } from 'react-icons/fa6'
+import { FaReact, FaNodeJs, FaPhp, FaFigma } from 'react-icons/fa6'
+import { FaJsSquare } from "react-icons/fa";
 import Section from './Section'
 import SectionTitle from './SectionTitle'
 
@@ -8,7 +9,7 @@ const About = ({ isDarkMode }) => {
   const techStack = [
     { name: 'React', icon: FaReact, color: 'text-blue-500', bg: 'bg-blue-500/10', level: 'Advanced' },
     { name: 'Node.js', icon: FaNodeJs, color: 'text-green-500', bg: 'bg-green-500/10', level: 'Advanced' },
-    { name: 'JavaScript', icon: FaJs, color: 'text-yellow-500', bg: 'bg-yellow-500/10', level: 'Expert' },
+    { name: 'JavaScript', icon: FaJsSquare, color: 'text-yellow-500', bg: 'bg-yellow-500/10', level: 'Expert' },
     { name: 'PHP', icon: FaPhp, color: 'text-purple-500', bg: 'bg-purple-500/10', level: 'Advanced' },
     { name: 'UI/UX Design', icon: FaFigma, color: 'text-orange-500', bg: 'bg-orange-500/10', level: 'Intermediate' },,
     { name: 'MongoDB', icon: Database, color: 'text-green-600', bg: 'bg-green-600/10', level: 'Intermediate' },
