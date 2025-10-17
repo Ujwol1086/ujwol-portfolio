@@ -116,7 +116,7 @@ const About = ({ isDarkMode }) => {
           </motion.p>
         </motion.div>
 
-        {/* Main Content Grid */}
+        {/* Main Content Grid  (left and right) */}
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Left Column - Personal Info & Skills */}
           <motion.div 
