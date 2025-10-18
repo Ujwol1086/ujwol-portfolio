@@ -4,6 +4,7 @@ import Section from "./Section";
 import SectionTitle from "./SectionTitle";
 
 const Projects = ({ isDarkMode }) => {
+  // All of my projects as an array of objects
   const projects = [
     {
       title: "E-commerce Platform",
