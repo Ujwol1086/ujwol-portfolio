@@ -4,6 +4,7 @@ import Section from './Section'
 import SectionTitle from './SectionTitle'
 
 const Skills = ({ isDarkMode }) => {
+  // skills data and their progress level
   const skills = [
     { name: 'Frontend Development', level: 95, icon: Code },
     { name: 'Backend Development', level: 85, icon: Server },
