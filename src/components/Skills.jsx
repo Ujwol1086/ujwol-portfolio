@@ -14,6 +14,8 @@ const Skills = ({ isDarkMode }) => {
     { name: 'Team Leadership', level: 90, icon: Briefcase }
   ]
 
+  // Certifications
+
   const certifications = [
     'MERN Stack Development',
     'Python Intermediate',
