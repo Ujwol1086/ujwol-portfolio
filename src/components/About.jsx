@@ -67,6 +67,7 @@ const About = ({ isDarkMode }) => {
     },
   ];
 
+  // Skills with progress percentages
   const skills = [
     {
       title: "Frontend Development",
