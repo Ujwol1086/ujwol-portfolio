@@ -364,7 +364,7 @@ const About = ({ isDarkMode }) => {
                     } overflow-hidden`}
                   >
                     <motion.div
-                      className={`h-full rounded-full bg-gradient-to-r from-blue-500 to-purple-500`}
+                      className={`h-full rounded-full bg-linear-to-r from-blue-500 to-purple-500`}
                       initial={{ width: 0 }}
                       whileInView={{ width: `${skill.progress}%` }}
                       viewport={{ once: true }}
