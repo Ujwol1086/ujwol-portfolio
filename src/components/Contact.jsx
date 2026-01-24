@@ -268,7 +268,7 @@ const Contact = ({ isDarkMode }) => {
               Whether it's a full-stack application, a creative design project, or just a friendly chat about technology, 
               I'm here to help bring your ideas to life.
             </p>
-            
+            {/* Call to Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <motion.a
                 href="mailto:ujwolaryal@gmail.com"
