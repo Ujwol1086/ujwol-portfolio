@@ -41,14 +41,14 @@ const About = ({ isDarkMode }) => {
       icon: FaJsSquare,
       color: "text-yellow-500",
       bg: "bg-yellow-500/10",
-      level: "Expert",
+      level: "Advanced",
     },
     {
       name: "PHP",
       icon: FaPhp,
       color: "text-purple-500",
       bg: "bg-purple-500/10",
-      level: "Advanced",
+      level: "Intermediate",
     },
     {
       name: "UI/UX Design",
@@ -73,13 +73,13 @@ const About = ({ isDarkMode }) => {
       title: "Frontend Development",
       desc: "React, HTML5, CSS3, JavaScript, TypeScript",
       icon: Code,
-      progress: 90,
+      progress: 95,
     },
     {
       title: "Backend Development",
       desc: "Node.js, PHP, Express.js, REST APIs",
       icon: Server,
-      progress: 85,
+      progress: 90,
     },
     {
       title: "Database Management",
@@ -98,7 +98,7 @@ const About = ({ isDarkMode }) => {
   const achievements = [
     {
       icon: Award,
-      title: "3+ Years",
+      title: "2+ Years",
       desc: "Professional Experience",
       color: "text-yellow-500",
     },
