@@ -67,6 +67,7 @@ function App() {
           scrollYProgress={scrollYProgress}
         />
 
+        <main id="main-content">
         <Hero
           scrollYProgress={scrollYProgress}
           scrollToSection={scrollToSection}
@@ -84,7 +85,8 @@ function App() {
         <Contact isDarkMode={isDarkMode} />
 
         <Footer />
-        
+        </main>
+
         <BackToTop />
       </div>
     </div>

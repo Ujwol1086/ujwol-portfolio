@@ -57,7 +57,6 @@ const About = ({ isDarkMode }) => {
       bg: "bg-orange-500/10",
       level: "Intermediate",
     },
-    ,
     {
       name: "MongoDB",
       icon: DiMongodb,
