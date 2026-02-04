@@ -2,13 +2,80 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/src/assets/Ujwol_logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Ujwol Aryal - Innovative IT Professional & Full Stack Developer. BSc CSIT student with expertise in MERN stack, React, Node.js, and modern web technologies." />
+    <meta name="theme-color" content="#0f172a" />
+
+    <!-- Primary Meta Tags -->
     <title>Ujwol Aryal - Full Stack Developer</title>
+    <meta name="title" content="Ujwol Aryal - Full Stack Developer | React, Node.js, MERN" />
+    <meta name="description" content="Ujwol Aryal - Innovative IT Professional & Full Stack Developer. BSc CSIT student with expertise in MERN stack, React, Node.js, and modern web technologies. Based in Kathmandu, Nepal." />
+    <meta name="keywords" content="Ujwol Aryal, Full Stack Developer, React Developer, Node.js, MERN Stack, Web Developer, Frontend Developer, Backend Developer, Kathmandu, Nepal, JavaScript, TypeScript" />
+    <meta name="author" content="Ujwol Aryal" />
+    <meta name="robots" content="index, follow" />
+    <!-- Replace with your live URL when deploying -->
+    <link rel="canonical" href="https://ujwolaryal.com/" />
+
+    <!-- Favicon: add Ujwol_logo.png to public/ for production branding -->
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="apple-touch-icon" href="/vite.svg" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ujwolaryal.com/" />
+    <meta property="og:title" content="Ujwol Aryal - Full Stack Developer" />
+    <meta property="og:description" content="Innovative IT Professional & Full Stack Developer. Expertise in MERN stack, React, Node.js, and modern web technologies. Available for projects." />
+    <meta property="og:image" content="https://ujwolaryal.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Ujwol Aryal Portfolio" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://ujwolaryal.com/" />
+    <meta name="twitter:title" content="Ujwol Aryal - Full Stack Developer" />
+    <meta name="twitter:description" content="Innovative IT Professional & Full Stack Developer. MERN stack, React, Node.js. Available for projects." />
+    <meta name="twitter:image" content="https://ujwolaryal.com/og-image.png" />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+
+    <!-- JSON-LD Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://ujwolaryal.com/#person",
+          "name": "Ujwol Aryal",
+          "url": "https://ujwolaryal.com",
+          "jobTitle": "Full Stack Developer",
+          "description": "Innovative IT Professional & Full Stack Developer with expertise in MERN stack, React, Node.js, and modern web technologies.",
+          "email": "ujwolaryal@gmail.com",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Kathmandu",
+            "addressCountry": "NP"
+          },
+          "sameAs": [
+            "https://github.com/ujwol1086",
+            "https://www.linkedin.com/in/ujwol-aryal"
+          ],
+          "knowsAbout": ["React", "Node.js", "JavaScript", "MongoDB", "MERN Stack", "TypeScript", "Express.js"]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://ujwolaryal.com/#website",
+          "url": "https://ujwolaryal.com",
+          "name": "Ujwol Aryal - Full Stack Developer",
+          "description": "Portfolio of Ujwol Aryal - Full Stack Developer specializing in React, Node.js, and MERN stack.",
+          "publisher": { "@id": "https://ujwolaryal.com/#person" },
+          "inLanguage": "en-US"
+        }
+      ]
+    }
+    </script>
   </body>
 </html>
