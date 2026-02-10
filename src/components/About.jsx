@@ -103,7 +103,7 @@ const About = ({ isDarkMode }) => {
     },
     {
       icon: Target,
-      title: "50+",
+      title: "30+",
       desc: "Projects Completed",
       color: "text-blue-500",
     },
