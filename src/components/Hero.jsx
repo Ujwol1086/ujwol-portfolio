@@ -121,40 +121,41 @@ const Hero = ({ scrollYProgress, scrollToSection, isDarkMode }) => {
     }, [count, isDarkMode]);
 
     useFrame((state) => {
-      if (points.current && particlesRef.current) {
-        const time = state.clock.elapsedTime;
-        const positions = particlesRef.current.positions;
-        const velocities = particlesRef.current.velocities;
-        
-        // Update particle positions with smooth animation
-        for (let i = 0; i < count; i++) {
-          const i3 = i * 3;
-          
-          // Add velocity
-          positions[i3] += velocities[i3];
-          positions[i3 + 1] += velocities[i3 + 1];
-          positions[i3 + 2] += velocities[i3 + 2];
-          
-          // Add wave motion
-          positions[i3 + 1] += Math.sin(time * 0.5 + i * 0.1) * 0.002;
-          positions[i3] += Math.cos(time * 0.3 + i * 0.1) * 0.002;
-          
-          // Boundary checking with smooth wrapping
-          if (Math.abs(positions[i3]) > 10) {
-            positions[i3] = -Math.sign(positions[i3]) * 10;
-          }
-          if (Math.abs(positions[i3 + 1]) > 10) {
-            positions[i3 + 1] = -Math.sign(positions[i3 + 1]) * 10;
-          }
-          if (Math.abs(positions[i3 + 2]) > 10) {
-            positions[i3 + 2] = -Math.sign(positions[i3 + 2]) * 10;
-          }
+      const userData = particlesRef.current?.userData;
+      const positions = userData?.positions;
+      const velocities = userData?.velocities;
+      if (!points.current?.geometry?.attributes?.position || !positions || !velocities) return;
+
+      const time = state.clock.elapsedTime;
+
+      // Update particle positions with smooth animation
+      for (let i = 0; i < count; i++) {
+        const i3 = i * 3;
+
+        // Add velocity
+        positions[i3] += velocities[i3];
+        positions[i3 + 1] += velocities[i3 + 1];
+        positions[i3 + 2] += velocities[i3 + 2];
+
+        // Add wave motion
+        positions[i3 + 1] += Math.sin(time * 0.5 + i * 0.1) * 0.002;
+        positions[i3] += Math.cos(time * 0.3 + i * 0.1) * 0.002;
+
+        // Boundary checking with smooth wrapping
+        if (Math.abs(positions[i3]) > 10) {
+          positions[i3] = -Math.sign(positions[i3]) * 10;
         }
-        
-        // Update geometry attributes
-        points.current.geometry.attributes.position.array = positions;
-        points.current.geometry.attributes.position.needsUpdate = true;
+        if (Math.abs(positions[i3 + 1]) > 10) {
+          positions[i3 + 1] = -Math.sign(positions[i3 + 1]) * 10;
+        }
+        if (Math.abs(positions[i3 + 2]) > 10) {
+          positions[i3 + 2] = -Math.sign(positions[i3 + 2]) * 10;
+        }
       }
+
+      // Update geometry attributes
+      points.current.geometry.attributes.position.array = positions;
+      points.current.geometry.attributes.position.needsUpdate = true;
     });
 
     return (
@@ -342,26 +343,68 @@ const Hero = ({ scrollYProgress, scrollToSection, isDarkMode }) => {
     return () => clearTimeout(timeout);
   }, [currentText, isDeleting, currentRoleIndex, roles]);
 
-  // Parallax effects
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "200%"]);
+  // Parallax: multiple layers for depth (Webflow-style)
+  const backgroundYSlower = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "220%"]);
 
-  const fadeInUp = {
-    initial: { opacity: 0, y: 60 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6, ease: "easeOut" },
+  // Scroll-linked fade & scale: hero content recedes as you scroll
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0]);
+  const heroScale = useTransform(scrollYProgress, [0, 0.35], [1, 0.96]);
+
+  const easeSmooth = [0.22, 1, 0.36, 1];
+
+  // Entrance choreography: staggered reveal (Webflow-style)
+  const heroLeftVariants = {
+    initial: {},
+    animate: {
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
   };
 
-  const slideInLeft = {
-    initial: { opacity: 0, x: -100 },
-    animate: { opacity: 1, x: 0 },
-    transition: { duration: 0.8, ease: "easeOut" },
+  const heroItemVariant = {
+    initial: {
+      opacity: 0,
+      y: 32,
+      filter: "blur(6px)",
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: {
+        duration: 0.7,
+        ease: easeSmooth,
+      },
+    },
+  };
+
+  const headlineWordVariant = {
+    initial: { opacity: 0, y: 24, filter: "blur(4px)" },
+    animate: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: { duration: 0.6, ease: easeSmooth },
+    },
+  };
+
+  const headlineContainerVariants = {
+    initial: {},
+    animate: {
+      transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+    },
   };
 
   const slideInRight = {
-    initial: { opacity: 0, x: 100 },
-    animate: { opacity: 1, x: 0 },
-    transition: { duration: 0.8, ease: "easeOut" },
+    initial: { opacity: 0, x: 80 },
+    animate: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.85, ease: easeSmooth, delay: 0.5 },
+    },
   };
 
   return (
@@ -400,32 +443,34 @@ const Hero = ({ scrollYProgress, scrollToSection, isDarkMode }) => {
         </Canvas>
       </div>
 
-      {/* Background Elements */}
+      {/* Background Elements - slower parallax layer for depth */}
       <motion.div
         className={`absolute inset-0 ${isDarkMode ? 'opacity-20' : 'opacity-5'}`}
-        style={{ y: backgroundY }}
+        style={{ y: backgroundYSlower }}
       >
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse" />
         <div className="absolute top-40 right-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse" />
         <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse" />
       </motion.div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      {/* Hero content wrapper: scroll-linked fade & scale */}
+      <motion.div
+        className="max-w-7xl mx-auto relative z-10"
+        style={{ opacity: heroOpacity, scale: heroScale }}
+      >
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Column - Text Content */}
-          <motion.div 
+          {/* Left Column - Staggered entrance choreography */}
+          <motion.div
             className="text-center lg:text-left"
-            variants={slideInLeft}
+            variants={heroLeftVariants}
             initial="initial"
             animate="animate"
             style={{ y: textY }}
           >
-            {/* Greeting Animation */}
+            {/* Greeting Animation (mobile) */}
             <motion.div
               className="mb-8 lg:hidden"
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              variants={heroItemVariant}
             >
               <motion.div
                 className="w-24 h-24 mx-auto bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-4xl shadow-2xl"
@@ -443,19 +488,22 @@ const Hero = ({ scrollYProgress, scrollToSection, isDarkMode }) => {
               </motion.div>
             </motion.div>
 
+            {/* Headline - word-by-word staggered reveal */}
             <motion.h1
-              className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-400'}`}
-              {...fadeInUp}
+              className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-4 flex flex-wrap justify-center lg:justify-start gap-x-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}
+              variants={headlineContainerVariants}
+              initial="initial"
+              animate="animate"
             >
-              Hi, I'm <span className="gradient-text">Ujwol Aryal</span>
+              <motion.span variants={headlineWordVariant}>Hi,</motion.span>
+              <motion.span variants={headlineWordVariant}>I'm</motion.span>
+              <motion.span variants={headlineWordVariant} className="gradient-text">Ujwol Aryal</motion.span>
             </motion.h1>
 
             {/* Typewriter Effect */}
             <motion.div
               className="mb-8 h-16 flex items-center justify-center lg:justify-start"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              variants={heroItemVariant}
             >
               <div className={`text-2xl md:text-3xl lg:text-4xl font-semibold ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>
                 <span className="font-mono">I'm a </span>
@@ -472,9 +520,7 @@ const Hero = ({ scrollYProgress, scrollToSection, isDarkMode }) => {
 
             <motion.p
               className={`text-lg md:text-xl lg:text-2xl mb-8 max-w-2xl mx-auto lg:mx-0 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
+              variants={heroItemVariant}
             >
               Innovative IT Professional & Full Stack Developer passionate about
               creating
@@ -487,15 +533,14 @@ const Hero = ({ scrollYProgress, scrollToSection, isDarkMode }) => {
 
             <motion.div
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
+              variants={heroItemVariant}
             >
               <motion.button
                 onClick={() => scrollToSection("projects")}
                 className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-full transition-all duration-300 shadow-lg hover:shadow-xl"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
               >
                 View My Work
               </motion.button>
@@ -508,6 +553,7 @@ const Hero = ({ scrollYProgress, scrollToSection, isDarkMode }) => {
                 }`}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
               >
                 Get In Touch
               </motion.button>
@@ -659,7 +705,7 @@ const Hero = ({ scrollYProgress, scrollToSection, isDarkMode }) => {
             </motion.div>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Scroll Indicator */}
       <motion.div
