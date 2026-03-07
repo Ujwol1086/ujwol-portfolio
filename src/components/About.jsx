@@ -16,6 +16,7 @@ import {
 import { FaReact, FaNodeJs, FaPhp, FaFigma } from "react-icons/fa6";
 import { FaJsSquare } from "react-icons/fa";
 import { DiNodejs, DiMongodb } from "react-icons/di";
+import { SiFastapi } from "react-icons/si";
 import Section from "./Section";
 import SectionTitle from "./SectionTitle";
 
@@ -62,6 +63,13 @@ const About = ({ isDarkMode }) => {
       icon: DiMongodb,
       color: "text-green-600",
       bg: "bg-green-600/10",
+      level: "Intermediate",
+    },
+    {
+      name: "FastAPI",
+      icon: SiFastapi,
+      color: "text-teal-500",
+      bg: "bg-teal-500/10",
       level: "Intermediate",
     },
   ];
