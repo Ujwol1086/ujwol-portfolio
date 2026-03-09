@@ -16,7 +16,7 @@ import {
 import { FaReact, FaNodeJs, FaPhp, FaFigma } from "react-icons/fa6";
 import { FaJsSquare } from "react-icons/fa";
 import { DiNodejs, DiMongodb } from "react-icons/di";
-import { SiFastapi } from "react-icons/si";
+import { SiFastapi, SiPython } from "react-icons/si";
 import Section from "./Section";
 import SectionTitle from "./SectionTitle";
 
@@ -70,6 +70,13 @@ const About = ({ isDarkMode }) => {
       icon: SiFastapi,
       color: "text-teal-500",
       bg: "bg-teal-500/10",
+      level: "Intermediate",
+    },
+    {
+      name: "Python",
+      icon: SiPython,
+      color: "text-blue-600",
+      bg: "bg-blue-600/10",
       level: "Intermediate",
     },
   ];
