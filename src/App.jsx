@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useScroll } from "framer-motion";
 
 // Import components
-import DoorReveal from "./components/DoorReveal";
 import Navigation from "./components/Navigation";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -56,43 +55,41 @@ function App() {
   };
 
   return (
-    <DoorReveal>
-      <div className={isDarkMode ? "dark" : ""}>
-        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-white transition-all duration-500">
-          <Navigation
-            activeSection={activeSection}
-            isMenuOpen={isMenuOpen}
-            setIsMenuOpen={setIsMenuOpen}
-            isDarkMode={isDarkMode}
-            setIsDarkMode={setIsDarkMode}
-            scrollToSection={scrollToSection}
+    <div className={isDarkMode ? "dark" : ""}>
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-white transition-all duration-500">
+        <Navigation
+          activeSection={activeSection}
+          isMenuOpen={isMenuOpen}
+          setIsMenuOpen={setIsMenuOpen}
+          isDarkMode={isDarkMode}
+          setIsDarkMode={setIsDarkMode}
+          scrollToSection={scrollToSection}
+          scrollYProgress={scrollYProgress}
+        />
+
+        <main id="main-content">
+          <Hero
             scrollYProgress={scrollYProgress}
+            scrollToSection={scrollToSection}
+            isDarkMode={isDarkMode}
           />
 
-          <main id="main-content">
-            <Hero
-              scrollYProgress={scrollYProgress}
-              scrollToSection={scrollToSection}
-              isDarkMode={isDarkMode}
-            />
+          <About isDarkMode={isDarkMode} />
 
-            <About isDarkMode={isDarkMode} />
+          <Experience isDarkMode={isDarkMode} />
 
-            <Experience isDarkMode={isDarkMode} />
+          <Skills isDarkMode={isDarkMode} />
 
-            <Skills isDarkMode={isDarkMode} />
+          <Projects isDarkMode={isDarkMode} />
 
-            <Projects isDarkMode={isDarkMode} />
+          <Contact isDarkMode={isDarkMode} />
 
-            <Contact isDarkMode={isDarkMode} />
+          <Footer />
+        </main>
 
-            <Footer />
-          </main>
-
-          <BackToTop />
-        </div>
+        <BackToTop />
       </div>
-    </DoorReveal>
+    </div>
   );
 }
 
