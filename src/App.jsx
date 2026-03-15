@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useScroll } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 
 // Import components
 import Navigation from "./components/Navigation";
@@ -55,7 +55,12 @@ function App() {
   };
 
   return (
-    <div className={isDarkMode ? "dark" : ""}>
+    <motion.div
+      className={isDarkMode ? "dark" : ""}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+    >
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-white transition-all duration-500">
         <Navigation
           activeSection={activeSection}
@@ -69,7 +74,6 @@ function App() {
 
         <main id="main-content">
           <Hero
-            scrollYProgress={scrollYProgress}
             scrollToSection={scrollToSection}
             isDarkMode={isDarkMode}
           />
@@ -89,7 +93,7 @@ function App() {
 
         <BackToTop />
       </div>
-    </div>
+    </motion.div>
   );
 }
 

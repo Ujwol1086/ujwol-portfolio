@@ -1,4 +1,4 @@
-import { motion, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import Ujwol from "../assets/Profile.jpg";
 import { useState, useEffect } from "react";
 import { Canvas } from '@react-three/fiber';
@@ -7,7 +7,7 @@ import { useFrame, useThree } from '@react-three/fiber';
 import { Float, Sparkles } from '@react-three/drei';
 import * as THREE from 'three';
 
-const Hero = ({ scrollYProgress, scrollToSection, isDarkMode }) => {
+const Hero = ({ scrollToSection, isDarkMode }) => {
   // Typewriter effect state
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [currentText, setCurrentText] = useState("");
@@ -343,17 +343,9 @@ const Hero = ({ scrollYProgress, scrollToSection, isDarkMode }) => {
     return () => clearTimeout(timeout);
   }, [currentText, isDeleting, currentRoleIndex, roles]);
 
-  // Parallax: multiple layers for depth (Webflow-style)
-  const backgroundYSlower = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "220%"]);
+  const easeOutSmooth = [0.16, 1, 0.3, 1];
 
-  // Scroll-linked fade & scale: hero content recedes as you scroll
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.35], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0, 0.35], [1, 0.96]);
-
-  const easeSmooth = [0.22, 1, 0.36, 1];
-
-  // Entrance choreography: staggered reveal (Webflow-style)
+  // Entrance choreography: smooth staggered reveal (no blur for performance)
   const heroLeftVariants = {
     initial: {},
     animate: {
@@ -365,45 +357,39 @@ const Hero = ({ scrollYProgress, scrollToSection, isDarkMode }) => {
   };
 
   const heroItemVariant = {
-    initial: {
-      opacity: 0,
-      y: 32,
-      filter: "blur(6px)",
-    },
+    initial: { opacity: 0, y: 20 },
     animate: {
       opacity: 1,
       y: 0,
-      filter: "blur(0px)",
       transition: {
-        duration: 0.7,
-        ease: easeSmooth,
+        duration: 0.85,
+        ease: easeOutSmooth,
       },
     },
   };
 
   const headlineWordVariant = {
-    initial: { opacity: 0, y: 24, filter: "blur(4px)" },
+    initial: { opacity: 0, y: 16 },
     animate: {
       opacity: 1,
       y: 0,
-      filter: "blur(0px)",
-      transition: { duration: 0.6, ease: easeSmooth },
+      transition: { duration: 0.75, ease: easeOutSmooth },
     },
   };
 
   const headlineContainerVariants = {
     initial: {},
     animate: {
-      transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+      transition: { staggerChildren: 0.08, delayChildren: 0.15 },
     },
   };
 
   const slideInRight = {
-    initial: { opacity: 0, x: 80 },
+    initial: { opacity: 0, x: 40 },
     animate: {
       opacity: 1,
       x: 0,
-      transition: { duration: 0.85, ease: easeSmooth, delay: 0.5 },
+      transition: { duration: 0.9, ease: easeOutSmooth, delay: 0.5 },
     },
   };
 
@@ -443,21 +429,17 @@ const Hero = ({ scrollYProgress, scrollToSection, isDarkMode }) => {
         </Canvas>
       </div>
 
-      {/* Background Elements - slower parallax layer for depth */}
-      <motion.div
+      {/* Background Elements */}
+      <div
         className={`absolute inset-0 ${isDarkMode ? 'opacity-20' : 'opacity-5'}`}
-        style={{ y: backgroundYSlower }}
       >
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse" />
         <div className="absolute top-40 right-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse" />
         <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse" />
-      </motion.div>
+      </div>
 
-      {/* Hero content wrapper: scroll-linked fade & scale */}
-      <motion.div
-        className="max-w-7xl mx-auto relative z-10"
-        style={{ opacity: heroOpacity, scale: heroScale }}
-      >
+      {/* Hero content wrapper */}
+      <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Staggered entrance choreography */}
           <motion.div
@@ -465,7 +447,6 @@ const Hero = ({ scrollYProgress, scrollToSection, isDarkMode }) => {
             variants={heroLeftVariants}
             initial="initial"
             animate="animate"
-            style={{ y: textY }}
           >
             {/* Greeting Animation (mobile) */}
             <motion.div
@@ -569,9 +550,9 @@ const Hero = ({ scrollYProgress, scrollToSection, isDarkMode }) => {
           >
             <motion.div
               className="relative"
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+              transition={{ duration: 0.85, ease: easeOutSmooth, delay: 0.4 }}
             >
               {/* Profile Image Container */}
               <motion.div
@@ -664,7 +645,7 @@ const Hero = ({ scrollYProgress, scrollToSection, isDarkMode }) => {
                 className="hidden lg:block absolute -top-16 left-1/2 transform -translate-x-1/2"
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
+                transition={{ duration: 0.7, ease: easeOutSmooth, delay: 0.55 }}
               >
                 <motion.div
                   className="w-16 h-16 bg-gradient-to-r from-gray-800 to-blue-900 rounded-lg flex items-center justify-center text-2xl shadow-2xl border border-blue-500/30"
@@ -686,7 +667,7 @@ const Hero = ({ scrollYProgress, scrollToSection, isDarkMode }) => {
                 className="absolute top-4 right-4 flex items-center space-x-2 bg-black/80 backdrop-blur-sm rounded-full px-3 py-1 text-xs text-white"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 1 }}
+                transition={{ duration: 0.6, ease: easeOutSmooth, delay: 0.7 }}
               >
                 <motion.div
                   className="w-2 h-2 bg-green-400 rounded-full"
@@ -705,14 +686,14 @@ const Hero = ({ scrollYProgress, scrollToSection, isDarkMode }) => {
             </motion.div>
           </motion.div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Scroll Indicator */}
       <motion.div
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
+        transition={{ delay: 0.9, duration: 0.6, ease: easeOutSmooth }}
       >
         <motion.div
           className={`w-6 h-10 border-2 rounded-full flex justify-center ${

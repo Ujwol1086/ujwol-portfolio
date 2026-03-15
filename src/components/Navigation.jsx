@@ -38,9 +38,9 @@ const Navigation = ({
             ? 'bg-black/20 backdrop-blur-md border-white/10 shadow-lg shadow-black/20' 
             : 'bg-white/80 backdrop-blur-md border-gray-200/50 shadow-lg shadow-gray-200/20'
         }`}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6 }}
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
